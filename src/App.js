@@ -1,15 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../routes/Home";
-import Detail from "../routes/Detail";
+import React, { useState } from "react";
+import ReactDom from "react-dom";
+
+import "./styles.css";
+
+const useInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setValue(value);
+  };
+  return { value, onChange };
+};
 
 function App() {
+  const name = useInput("Mr.");
   return (
-    <Router>
-      <Routes>
-        <Route path="/movie/:id" element={<Detail />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <h1>Hello</h1>
+      <input placeholder="Name" {...name} />
+    </div>
   );
 }
 
